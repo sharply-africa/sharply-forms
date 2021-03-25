@@ -22,13 +22,7 @@ export default {
   plugins: [
     external(),
     alias({
-      entries: [
-        { find: "components", replacement: `${srcDir}/components` },
-        { find: "css-reset", replacement: `${srcDir}/css-reset` },
-        { find: "icons", replacement: `${srcDir}/icons` },
-        { find: "system", replacement: `${srcDir}/system` },
-        { find: "theme", replacement: `${srcDir}/theme` },
-      ],
+      entries: [{ find: "schemas", replacement: `${srcDir}/schemas` }],
     }),
     babel({
       exclude: "node_modules/**",
