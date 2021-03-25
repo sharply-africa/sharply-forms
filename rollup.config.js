@@ -30,7 +30,6 @@ export default {
         { find: "theme", replacement: `${srcDir}/theme` },
       ],
     }),
-    svgr(),
     babel({
       exclude: "node_modules/**",
     }),
