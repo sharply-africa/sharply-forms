@@ -12,7 +12,13 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "schemas";
 
-export const LoginForm = ({ buttonText, extras, onSubmit, schema }) => {
+export const LoginForm = ({
+  buttonText,
+  extras,
+  isLoading,
+  onSubmit,
+  schema,
+}) => {
   const { register, handleSubmit, errors, control } = useForm({
     resolver: yupResolver(schema || loginSchema),
     defaultValues: {
@@ -59,7 +65,11 @@ export const LoginForm = ({ buttonText, extras, onSubmit, schema }) => {
         />
       </FormGroup>
 
-      <Button onClick={handleSubmit(onSubmit)} defaultRightIcon>
+      <Button
+        defaultRightIcon
+        isLoading={isLoading}
+        onClick={handleSubmit(onSubmit)}
+      >
         {buttonText}
       </Button>
 
@@ -71,6 +81,7 @@ export const LoginForm = ({ buttonText, extras, onSubmit, schema }) => {
 LoginForm.defaultProps = {
   buttonText: "Login",
   extras: null,
+  isLoading: false,
   onSubmit: () => {},
   schema: null,
 };

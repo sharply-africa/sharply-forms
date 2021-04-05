@@ -4,7 +4,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { passwordSchema } from "schemas";
 
-export const PasswordForm = ({ buttonText, extras, onSubmit, schema }) => {
+export const PasswordForm = ({
+  buttonText,
+  extras,
+  isLoading,
+  onSubmit,
+  schema,
+}) => {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema || passwordSchema),
     defaultValues: {
@@ -38,7 +44,11 @@ export const PasswordForm = ({ buttonText, extras, onSubmit, schema }) => {
         <FormError error={errors?.confirmPassword?.message} />
       </FormGroup>
 
-      <Button onClick={handleSubmit(onSubmit)} defaultRightIcon>
+      <Button
+        defaultRightIcon
+        isLoading={isLoading}
+        onClick={handleSubmit(onSubmit)}
+      >
         {buttonText}
       </Button>
 
@@ -50,6 +60,7 @@ export const PasswordForm = ({ buttonText, extras, onSubmit, schema }) => {
 PasswordForm.defaultProps = {
   buttonText: "Login",
   extras: null,
+  isLoading: false,
   onSubmit: () => {},
   schema: null,
 };
