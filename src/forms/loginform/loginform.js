@@ -29,14 +29,14 @@ export const LoginForm = ({
   return (
     <Stack as="form" spacing={6} onSubmit={handleSubmit(onSubmit)}>
       <FormGroup>
-        <Label htmlFor="email">Email Address or Phone Number</Label>
+        <Label htmlFor="username">Email Address or Phone Number</Label>
         <Input
-          id="email"
-          name="email"
+          id="username"
+          name="username"
           placeholder="Type your email address or Phone Number"
           ref={register}
         />
-        <FormError error={errors?.email?.message} />
+        <FormError error={errors?.username?.message} />
       </FormGroup>
 
       <FormGroup>
