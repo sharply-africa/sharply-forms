@@ -29,7 +29,7 @@ export const CustomerOrderForm = ({
   const isAdmin = type === "admin";
   const { register, handleSubmit, errors, control, watch } = useForm({
     resolver: yupResolver(
-      schema || orderSchema({ isAdmin, requiredSender: true })
+      schema || orderSchema({ isAdmin, requiredSender: false })
     ),
     defaultValues: {
       allowDescription: false,
