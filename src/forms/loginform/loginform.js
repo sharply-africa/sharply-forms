@@ -55,7 +55,7 @@ export const LoginForm = ({
         <Controller
           control={control}
           name="rememberMe"
-          render={({ onChange, onBlur, value }) => (
+          render={({ onChange, value }) => (
             <Checkbox
               active={value}
               onChange={onChange}

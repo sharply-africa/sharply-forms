@@ -1794,10 +1794,10 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@hookform/resolvers@^1.3.5":
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-1.3.5.tgz#554a4b1d5a3ff89551419b1eb963302f8021d0c9"
-  integrity sha512-R+bX8y2uk9buIhFrngmRRQMtpGjqZNDnCbANIbV1kIgAu5D6o+frFKCrewmicYKB2kowGyRJEx50Mu/nUdAeaA==
+"@hookform/resolvers@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-1.3.0.tgz#b2b0ff3b4b6b104e0df1954e58098e0a9cb6195d"
+  integrity sha512-NF+KJYDiFjnGAqhM92vG5kFJFCZFFjO5VxcByf06o6FrG7BEta5NDBhqVsIAMSfMNsn1kWfSKX1TkDT21xq9Hg==
 
 "@icons/material@^0.2.4":
   version "0.2.4"
@@ -9990,6 +9990,11 @@ lodash.memoize@^4.1.2:
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
 
+lodash.merge@^4.6.2:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
+  integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+
 lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
@@ -13721,11 +13726,12 @@ sisteransi@^1.0.4, sisteransi@^1.0.5:
   integrity sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==
 
 "skylos-ui@https://github.com/skyeops/skylos-ui":
-  version "0.2.3"
-  resolved "https://github.com/skyeops/skylos-ui#d1f63df57ae5a9e993aff24bd70e724abb20ae3b"
+  version "0.2.8"
+  resolved "https://github.com/skyeops/skylos-ui#9e58bfa3e1abf58b88b013dbf4c92e14d6a354e0"
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
+    lodash.merge "^4.6.2"
     styled-system "^5.1.5"
     tinycolor2 "^1.4.2"
 
