@@ -17,7 +17,13 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { orderSchema } from "schemas";
 
-export const AdminOrderForm = ({ buttonText, isLoading, onSubmit, schema }) => {
+export const AdminOrderForm = ({
+  buttonText,
+  isLoading,
+  onSubmit,
+  riders,
+  schema,
+}) => {
   const { register, handleSubmit, errors, control, watch } = useForm({
     resolver: yupResolver(
       schema || orderSchema({ isAdmin: true, requiredSender: true })
@@ -27,6 +33,7 @@ export const AdminOrderForm = ({ buttonText, isLoading, onSubmit, schema }) => {
       chargeRecipient: false,
       customer: "sender",
       items: [],
+      rider: "",
     },
   });
 
@@ -190,7 +197,17 @@ export const AdminOrderForm = ({ buttonText, isLoading, onSubmit, schema }) => {
           name="rider"
           placeholder="Type your email address or Phone Number"
           ref={register}
-        />
+        >
+          <option value="" disabled>
+            Select Option
+          </option>
+
+          {riders?.map((rider) => (
+            <option key={rider.id} value={rider.id}>
+              {rider.name}
+            </option>
+          ))}
+        </Select>
         <FormError error={errors?.rider?.message} />
       </FormGroup>
 
@@ -233,8 +250,8 @@ export const AdminOrderForm = ({ buttonText, isLoading, onSubmit, schema }) => {
 
 AdminOrderForm.defaultProps = {
   buttonText: "Submit Request",
-  extras: null,
   isLoading: false,
   onSubmit: () => {},
+  riders: [],
   schema: null,
 };

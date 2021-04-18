@@ -23,6 +23,7 @@ export const CustomerOrderForm = ({
   buttonText,
   isLoading,
   onSubmit,
+  riders,
   schema,
   type,
 }) => {
@@ -36,6 +37,7 @@ export const CustomerOrderForm = ({
       chargeRecipient: false,
       customer: "sender",
       items: [],
+      rider: "",
     },
   });
 
@@ -198,7 +200,17 @@ export const CustomerOrderForm = ({
             name="rider"
             placeholder="Type your email address or Phone Number"
             ref={register}
-          />
+          >
+            <option value="" disabled>
+              Select Option
+            </option>
+
+            {riders?.map((rider) => (
+              <option key={rider.id} value={rider.id}>
+                {rider.name}
+              </option>
+            ))}
+          </Select>
           <FormError error={errors?.rider?.message} />
         </FormGroup>
       ) : (
@@ -223,9 +235,9 @@ export const CustomerOrderForm = ({
 
 CustomerOrderForm.defaultProps = {
   buttonText: "Submit Request",
-  extras: null,
   isLoading: false,
   onSubmit: () => {},
-  type: "client",
+  riders: [],
   schema: null,
+  type: "client",
 };
