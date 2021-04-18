@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Button,
-  Card,
   Checkbox,
   FormError,
   FormGroup,
@@ -12,24 +11,16 @@ import {
   Stack,
   Switch,
   TagsInput,
-  Text,
   Textarea,
 } from "skylos-ui";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { orderSchema } from "schemas";
 
-export const AdminOrderForm = ({
-  buttonText,
-  isLoading,
-  onSubmit,
-  schema,
-  type,
-}) => {
-  const isAdmin = type === "admin";
+export const AdminOrderForm = ({ buttonText, isLoading, onSubmit, schema }) => {
   const { register, handleSubmit, errors, control, watch } = useForm({
     resolver: yupResolver(
-      schema || orderSchema({ isAdmin, requiredSender: true })
+      schema || orderSchema({ isAdmin: true, requiredSender: true })
     ),
     defaultValues: {
       allowDescription: false,
@@ -44,33 +35,36 @@ export const AdminOrderForm = ({
   return (
     <Stack as="form" spacing={6} onSubmit={handleSubmit(onSubmit)}>
       <FormGroup>
-        <Label htmlFor="customer">
-          {isAdmin ? "Customer is the?" : "You are the?"}
-        </Label>
-
-        <Controller
-          control={control}
-          name="customer"
-          render={({ onChange, value }) => (
-            <Stack direction="row" spacing={4}>
-              <Card
-                onClick={() => onChange("sender")}
-                sx={{ boxShadow: "none" }}
-              >
-                <Radio title="Sender" active={value === "sender"} />
-              </Card>
-
-              <Card
-                onClick={() => onChange("receiver")}
-                sx={{ boxShadow: "none" }}
-              >
-                <Radio active={value === "receiver"} title="Receiver" />
-              </Card>
-            </Stack>
-          )}
+        <Label htmlFor="sender.name">Senders Name</Label>
+        <Input
+          id="sender.name"
+          name="sender.name"
+          placeholder="Type name"
+          ref={register}
         />
+        <FormError error={errors?.sender?.name?.message} />
+      </FormGroup>
 
-        <FormError error={errors?.customer?.message} />
+      <FormGroup>
+        <Label htmlFor="sender.phoneNumber">Senders number</Label>
+        <Input
+          id="sender.phoneNumber"
+          name="sender.phoneNumber"
+          placeholder="+234"
+          ref={register}
+        />
+        <FormError error={errors?.sender?.phoneNumber?.message} />
+      </FormGroup>
+
+      <FormGroup>
+        <Label htmlFor="sender.email">Senders Email</Label>
+        <Input
+          id="sender.email"
+          name="sender.email"
+          placeholder="Type Email Address (Optional)"
+          ref={register}
+        />
+        <FormError error={errors?.sender?.email?.message} />
       </FormGroup>
 
       <FormGroup>
@@ -164,18 +158,17 @@ export const AdminOrderForm = ({
         <FormError error={errors?.recipient?.phoneNumber?.message} />
       </FormGroup>
 
-      {isAdmin ? (
-        <FormGroup>
-          <Label htmlFor="deliveryFee">Delivery Amount</Label>
-          <Input
-            id="deliveryFee"
-            name="deliveryFee"
-            placeholder="NGN"
-            ref={register}
-          />
-          <FormError error={errors?.deliveryFee?.message} />
-        </FormGroup>
-      ) : null}
+      <FormGroup>
+        <Label htmlFor="deliveryFee">Delivery Amount</Label>
+        <Input
+          id="deliveryFee"
+          name="deliveryFee"
+          placeholder="NGN"
+          ref={register}
+        />
+        <FormError error={errors?.deliveryFee?.message} />
+      </FormGroup>
+
       <FormGroup>
         <Controller
           control={control}
@@ -190,25 +183,42 @@ export const AdminOrderForm = ({
         />
       </FormGroup>
 
-      {isAdmin ? (
-        <FormGroup>
-          <Label htmlFor="rider">Assign Rider</Label>
-          <Select
-            id="rider"
-            name="rider"
-            placeholder="Type your email address or Phone Number"
-            ref={register}
-          />
-          <FormError error={errors?.rider?.message} />
-        </FormGroup>
-      ) : (
-        <Card>
-          <Text>
-            Request Submited will have to be accepted and an estimate will be
-            sent
-          </Text>
-        </Card>
-      )}
+      <FormGroup>
+        <Label htmlFor="rider">Assign Rider</Label>
+        <Select
+          id="rider"
+          name="rider"
+          placeholder="Type your email address or Phone Number"
+          ref={register}
+        />
+        <FormError error={errors?.rider?.message} />
+      </FormGroup>
+
+      <FormGroup>
+        <Controller
+          control={control}
+          name="customer"
+          render={({ onChange, value }) => (
+            <Stack spacing={6}>
+              <Radio
+                active={value === "sender"}
+                onClick={() => onChange("sender")}
+                subtitle="Request was made by the sender"
+                title="Save sender’s details"
+              />
+
+              <Radio
+                active={value === "receiver"}
+                onClick={() => onChange("receiver")}
+                subtitle="Request was made by the receiver"
+                title="Save receiver’s details"
+              />
+            </Stack>
+          )}
+        />
+
+        <FormError error={errors?.customer?.message} />
+      </FormGroup>
 
       <Button
         defaultRightIcon
@@ -226,6 +236,5 @@ AdminOrderForm.defaultProps = {
   extras: null,
   isLoading: false,
   onSubmit: () => {},
-  type: "client",
   schema: null,
 };

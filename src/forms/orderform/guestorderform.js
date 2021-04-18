@@ -90,7 +90,7 @@ export const GuestOrderForm = ({ buttonText, isLoading, onSubmit, schema }) => {
         <Input
           id="sender.email"
           name="sender.email"
-          placeholder="Type name"
+          placeholder="Type Email Address (Optional)"
           ref={register}
         />
         <FormError error={errors?.sender?.email?.message} />

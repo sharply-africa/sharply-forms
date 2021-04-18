@@ -8,8 +8,8 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
     description: yup.string(),
     items: yup
       .array()
-      .min(1, "Please input an item")
-      .required("Items are required"),
+      .min(1, "Please enter at least one item")
+      .required("Item(s) are required"),
     recipient: yup.object().shape({
       address: yup.string().required("Address is required"),
       email: yup.string().email("Email is invalid"),
@@ -18,13 +18,9 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
     }),
     sender: yup.object().shape({
       address: yup.string().required("Address is required"),
-
+      email: yup.string().email("Email is invalid"),
       ...(requiredSender
         ? {
-            email: yup
-              .string()
-              .email("Email is invalid")
-              .required("Email is required"),
             name: yup.string().required("Name is required"),
             phoneNumber: yup.string().required("Phone number is required"),
           }
