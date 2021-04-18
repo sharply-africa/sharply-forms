@@ -51,10 +51,10 @@ export const GuestOrderForm = ({ buttonText, isLoading, onSubmit, schema }) => {
               </Card>
 
               <Card
-                onClick={() => onChange("receiver")}
+                onClick={() => onChange("recipient")}
                 sx={{ boxShadow: "none" }}
               >
-                <Radio active={value === "receiver"} title="Receiver" />
+                <Radio active={value === "recipient"} title="Receiver" />
               </Card>
             </Stack>
           )}

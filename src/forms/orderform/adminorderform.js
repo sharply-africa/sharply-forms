@@ -225,8 +225,8 @@ export const AdminOrderForm = ({
               />
 
               <Radio
-                active={value === "receiver"}
-                onClick={() => onChange("receiver")}
+                active={value === "recipient"}
+                onClick={() => onChange("recipient")}
                 subtitle="Request was made by the receiver"
                 title="Save receiver’s details"
               />
