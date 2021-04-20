@@ -2,9 +2,9 @@ import React from "react";
 import { Button, FormError, FormGroup, Input, Label, Stack } from "skylos-ui";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { passwordSchema } from "schemas";
+import { confirmPasswordSchema } from "schemas";
 
-export const PasswordForm = ({
+export const ChangePasswordForm = ({
   buttonText,
   extras,
   isLoading,
@@ -12,7 +12,7 @@ export const PasswordForm = ({
   schema,
 }) => {
   const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(schema || passwordSchema),
+    resolver: yupResolver(schema || confirmPasswordSchema),
     defaultValues: {
       rememberMe: false,
     },
@@ -21,19 +21,31 @@ export const PasswordForm = ({
   return (
     <Stack as="form" spacing={6} onSubmit={handleSubmit(onSubmit)}>
       <FormGroup>
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="currentPassword">Current Password</Label>
         <Input
-          id="password"
+          id="currentPassword"
           placeholder="Type your password"
           type="password"
-          name="password"
+          name="currentPassword"
           ref={register}
         />
-        <FormError error={errors?.password?.message} />
+        <FormError error={errors?.currentPassword?.message} />
       </FormGroup>
 
       <FormGroup>
-        <Label htmlFor="confirmPassword">Re-enter Password</Label>
+        <Label htmlFor="newPassword">New Password</Label>
+        <Input
+          id="newPassword"
+          placeholder="Type your password"
+          type="password"
+          name="newPassword"
+          ref={register}
+        />
+        <FormError error={errors?.newPassword?.message} />
+      </FormGroup>
+
+      <FormGroup>
+        <Label htmlFor="confirmPassword">Re-enter New Password</Label>
         <Input
           id="confirmPassword"
           placeholder="Type your password"
@@ -57,8 +69,8 @@ export const PasswordForm = ({
   );
 };
 
-PasswordForm.defaultProps = {
-  buttonText: "Reset Password",
+ChangePasswordForm.defaultProps = {
+  buttonText: "Update Password",
   extras: null,
   isLoading: false,
   onSubmit: () => {},
