@@ -76,11 +76,17 @@ export const GuestOrderForm = ({ buttonText, isLoading, onSubmit, schema }) => {
 
       <FormGroup>
         <Label htmlFor="sender.phoneNumber">Senders number</Label>
-        <Input
-          id="sender.phoneNumber"
+        <Controller
+          control={control}
           name="sender.phoneNumber"
-          placeholder="+234"
-          ref={register}
+          render={(props) => (
+            <Input
+              id="sender.phoneNumber"
+              onlyCountries={["ng"]}
+              type="phone"
+              {...props}
+            />
+          )}
         />
         <FormError error={errors?.sender?.phoneNumber?.message} />
       </FormGroup>
@@ -178,12 +184,19 @@ export const GuestOrderForm = ({ buttonText, isLoading, onSubmit, schema }) => {
 
       <FormGroup>
         <Label htmlFor="recipient.phoneNumber">Receiver Number</Label>
-        <Input
-          id="recipient.phoneNumber"
+        <Controller
+          control={control}
           name="recipient.phoneNumber"
-          placeholder="+234"
-          ref={register}
+          render={(props) => (
+            <Input
+              id="recipient.phoneNumber"
+              onlyCountries={["ng"]}
+              type="phone"
+              {...props}
+            />
+          )}
         />
+
         <FormError error={errors?.recipient?.phoneNumber?.message} />
       </FormGroup>
 
@@ -203,7 +216,8 @@ export const GuestOrderForm = ({ buttonText, isLoading, onSubmit, schema }) => {
 
       <Card>
         <Text>
-          Request Submited will have to be accepted and an estimate will be sent
+          Request Submitted will have to be accepted and an estimate will be
+          sent
         </Text>
       </Card>
 

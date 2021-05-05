@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import "lib/yup-phone";
 
 export const orderSchema = ({ isAdmin, requiredSender }) =>
   yup.object().shape({
@@ -14,7 +15,7 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
       address: yup.string().required("Address is required"),
       email: yup.string().email("Email is invalid"),
       name: yup.string().required("Name is required"),
-      phoneNumber: yup.string().required("Phone number is required"),
+      phoneNumber: yup.string().phone().required("Phone number is required"),
     }),
     sender: yup.object().shape({
       address: yup.string().required("Address is required"),
@@ -22,11 +23,14 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
       ...(requiredSender
         ? {
             name: yup.string().required("Name is required"),
-            phoneNumber: yup.string().required("Phone number is required"),
+            phoneNumber: yup
+              .string()
+              .phone()
+              .required("Phone number is required"),
           }
         : {
             name: yup.string(),
-            phoneNumber: yup.string(),
+            phoneNumber: yup.string().phone(),
           }),
     }),
     ...(isAdmin

@@ -22,7 +22,10 @@ export default {
   plugins: [
     external(),
     alias({
-      entries: [{ find: "schemas", replacement: `${srcDir}/schemas` }],
+      entries: [
+        { find: "lib", replacement: `${srcDir}/lib` },
+        { find: "schemas", replacement: `${srcDir}/schemas` },
+      ],
     }),
     babel({
       exclude: "node_modules/**",

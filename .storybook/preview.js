@@ -1,5 +1,8 @@
 import * as React from "react";
 import { SkylosProvider } from "skylos-ui";
+import "react-toastify/dist/ReactToastify.min.css";
+import "react-phone-input-2/lib/style.css";
+import "react-day-picker/lib/style.css";
 
 const withTheme = (Story, context) => {
   return (

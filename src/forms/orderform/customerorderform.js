@@ -157,11 +157,17 @@ export const CustomerOrderForm = ({
 
       <FormGroup>
         <Label htmlFor="recipient.phoneNumber">Receiver Number</Label>
-        <Input
-          id="recipient.phoneNumber"
+        <Controller
+          control={control}
           name="recipient.phoneNumber"
-          placeholder="+234"
-          ref={register}
+          render={(props) => (
+            <Input
+              id="recipient.phoneNumber"
+              onlyCountries={["ng"]}
+              type="phone"
+              {...props}
+            />
+          )}
         />
         <FormError error={errors?.recipient?.phoneNumber?.message} />
       </FormGroup>
@@ -216,7 +222,7 @@ export const CustomerOrderForm = ({
       ) : (
         <Card>
           <Text>
-            Request Submited will have to be accepted and an estimate will be
+            Request Submitted will have to be accepted and an estimate will be
             sent
           </Text>
         </Card>
