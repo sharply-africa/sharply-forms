@@ -208,7 +208,7 @@ export const AdminOrderForm = ({
         <Select
           id="rider"
           name="rider"
-          placeholder="Type your email address or Phone Number"
+          placeholder="Select option"
           ref={register}
         >
           <option value="" disabled>

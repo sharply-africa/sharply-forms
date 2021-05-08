@@ -13801,7 +13801,7 @@ sisteransi@^1.0.4, sisteransi@^1.0.5:
 
 "skylos-ui@https://github.com/skyeops/skylos-ui":
   version "0.2.14"
-  resolved "https://github.com/skyeops/skylos-ui#472c30495108b6583b1c353e06f0dd72034fce2d"
+  resolved "https://github.com/skyeops/skylos-ui#8adecfb5409ebe1bfadb5e81a5be65a129a42e77"
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
