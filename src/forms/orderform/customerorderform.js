@@ -103,13 +103,7 @@ export const CustomerOrderForm = ({
           control={control}
           name="items"
           render={({ onChange, value }) => (
-            <TagsInput
-              inputProps={{
-                placeholder: "Type and press enter",
-              }}
-              value={value}
-              onChange={onChange}
-            />
+            <TagsInput value={value} onChange={onChange} />
           )}
         />
 
