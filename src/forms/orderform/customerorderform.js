@@ -37,6 +37,7 @@ export const CustomerOrderForm = ({
       chargeRecipient: false,
       customer: "sender",
       items: [],
+      payOnDelivery: false,
       rider: "",
     },
   });
@@ -167,17 +168,34 @@ export const CustomerOrderForm = ({
       </FormGroup>
 
       {isAdmin ? (
-        <FormGroup>
-          <Label htmlFor="deliveryFee">Delivery Amount</Label>
-          <Input
-            id="deliveryFee"
-            name="deliveryFee"
-            placeholder="NGN"
-            ref={register}
-          />
-          <FormError error={errors?.deliveryFee?.message} />
-        </FormGroup>
+        <>
+          <FormGroup>
+            <Label htmlFor="deliveryFee">Delivery Amount</Label>
+            <Input
+              id="deliveryFee"
+              name="deliveryFee"
+              placeholder="NGN"
+              ref={register}
+            />
+            <FormError error={errors?.deliveryFee?.message} />
+          </FormGroup>
+
+          <FormGroup>
+            <Controller
+              control={control}
+              name="payOnDelivery"
+              render={({ onChange, value }) => (
+                <Switch
+                  active={value}
+                  onChange={onChange}
+                  title="The item will be paid for on delivery"
+                />
+              )}
+            />
+          </FormGroup>
+        </>
       ) : null}
+
       <FormGroup>
         <Controller
           control={control}

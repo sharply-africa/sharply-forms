@@ -33,6 +33,7 @@ export const AdminOrderForm = ({
       chargeRecipient: false,
       customer: "sender",
       items: [],
+      payOnDelivery: false,
       rider: "",
     },
   });
@@ -181,6 +182,20 @@ export const AdminOrderForm = ({
           ref={register}
         />
         <FormError error={errors?.deliveryFee?.message} />
+      </FormGroup>
+
+      <FormGroup>
+        <Controller
+          control={control}
+          name="payOnDelivery"
+          render={({ onChange, value }) => (
+            <Switch
+              active={value}
+              onChange={onChange}
+              title="The item will be paid for on delivery"
+            />
+          )}
+        />
       </FormGroup>
 
       <FormGroup>

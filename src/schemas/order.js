@@ -5,6 +5,7 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
   yup.object().shape({
     allowDescription: yup.boolean(),
     chargeRecipient: yup.boolean(),
+    payOnDelivery: yup.boolean(),
     customer: yup.string(),
     description: yup.string(),
     items: yup
