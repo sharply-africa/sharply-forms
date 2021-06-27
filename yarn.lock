@@ -12287,7 +12287,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.4"
 
-prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.0.0, prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -12614,6 +12614,14 @@ react-fast-compare@^3.0.1, react-fast-compare@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
+
+react-google-autocomplete@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/react-google-autocomplete/-/react-google-autocomplete-2.3.1.tgz#5e2286a9e66d591539e7f9429097a39c4935c4ee"
+  integrity sha512-cXtzoDVHxGj6ohdyP++h31RvzmdBWoQIStqr5SX9yGQhVioRQGd041Hn/neUAjpzF2TGrxwvmThbBpgK9ChC+Q==
+  dependencies:
+    lodash.debounce "^4.0.8"
+    prop-types "^15.5.0"
 
 react-helmet-async@^1.0.2:
   version "1.0.9"
@@ -13801,7 +13809,7 @@ sisteransi@^1.0.4, sisteransi@^1.0.5:
 
 "skylos-ui@https://github.com/skyeops/skylos-ui":
   version "0.2.14"
-  resolved "https://github.com/skyeops/skylos-ui#72a06118087eb71580bebd5f9644b024844e52ee"
+  resolved "https://github.com/skyeops/skylos-ui#c2bd2be91167da0fc681f153a9d6ef283033dabc"
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"

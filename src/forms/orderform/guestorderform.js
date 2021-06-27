@@ -108,6 +108,7 @@ export const GuestOrderForm = ({ buttonText, isLoading, onSubmit, schema }) => {
           id="sender.address"
           name="sender.address"
           placeholder="Type Address"
+          type="address"
           ref={register}
         />
         <FormError error={errors?.sender?.address?.message} />
@@ -119,6 +120,7 @@ export const GuestOrderForm = ({ buttonText, isLoading, onSubmit, schema }) => {
           id="recipient.address"
           name="recipient.address"
           placeholder="Type Address"
+          type="address"
           ref={register}
         />
         <FormError error={errors?.recipient?.address?.message} />

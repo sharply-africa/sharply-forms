@@ -82,6 +82,7 @@ export const CustomerOrderForm = ({
           id="sender.address"
           name="sender.address"
           placeholder="Type Address"
+          type="address"
           ref={register}
         />
         <FormError error={errors?.sender?.address?.message} />
@@ -93,6 +94,7 @@ export const CustomerOrderForm = ({
           id="recipient.address"
           name="recipient.address"
           placeholder="Type Address"
+          type="address"
           ref={register}
         />
         <FormError error={errors?.recipient?.address?.message} />

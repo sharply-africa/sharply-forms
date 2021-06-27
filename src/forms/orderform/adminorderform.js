@@ -85,6 +85,7 @@ export const AdminOrderForm = ({
         <Label htmlFor="sender.address">Pick Up Address</Label>
         <Input
           id="sender.address"
+          type="address"
           name="sender.address"
           placeholder="Type Address"
           ref={register}
@@ -96,6 +97,7 @@ export const AdminOrderForm = ({
         <Label htmlFor="recipient.address">Receiver Address</Label>
         <Input
           id="recipient.address"
+          type="address"
           name="recipient.address"
           placeholder="Type Address"
           ref={register}
