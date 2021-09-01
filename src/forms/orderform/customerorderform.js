@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   Button,
   Card,
@@ -12,17 +12,18 @@ import {
   Stack,
   Switch,
   TagsInput,
-  Text,
   Textarea,
 } from "skylos-ui";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { orderSchema } from "schemas";
+import { DeliveryFee, PricePicker } from "src/components";
 
 export const CustomerOrderForm = ({
   buttonText,
   isLoading,
   onSubmit,
+  pricelists,
   riders,
   schema,
   type,
@@ -42,7 +43,13 @@ export const CustomerOrderForm = ({
     },
   });
 
+  const getPrice = useCallback((id) => pricelists.find((x) => x._id === id), [
+    pricelists,
+  ]);
+
   const showDescription = watch("allowDescription");
+  const priceID = watch("deliveryArea");
+  const selectedPrice = getPrice(priceID);
 
   return (
     <Stack as="form" spacing={6} onSubmit={handleSubmit(onSubmit)}>
@@ -75,6 +82,20 @@ export const CustomerOrderForm = ({
 
         <FormError error={errors?.customer?.message} />
       </FormGroup>
+
+      <Controller
+        control={control}
+        name="deliveryArea"
+        render={({ onChange, value }) => (
+          <PricePicker
+            error={errors?.deliveryArea?.message}
+            onChange={onChange}
+            getPrice={getPrice}
+            pricelists={pricelists}
+            value={value}
+          />
+        )}
+      />
 
       <FormGroup>
         <Label htmlFor="sender.address">Pick Up Address</Label>
@@ -234,12 +255,7 @@ export const CustomerOrderForm = ({
           <FormError error={errors?.rider?.message} />
         </FormGroup>
       ) : (
-        <Card>
-          <Text>
-            Request Submitted will have to be accepted and an estimate will be
-            sent
-          </Text>
-        </Card>
+        <DeliveryFee amount={selectedPrice?.amount} />
       )}
 
       <Button
@@ -257,6 +273,7 @@ CustomerOrderForm.defaultProps = {
   buttonText: "Submit Request",
   isLoading: false,
   onSubmit: () => {},
+  pricelists: [],
   riders: [],
   schema: null,
   type: "client",

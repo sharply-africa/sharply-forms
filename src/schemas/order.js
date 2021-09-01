@@ -7,6 +7,7 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
     chargeRecipient: yup.boolean(),
     payOnDelivery: yup.boolean(),
     customer: yup.string(),
+    deliveryArea: yup.string().required("Delivery area is required"),
     description: yup.string(),
     items: yup
       .array()
