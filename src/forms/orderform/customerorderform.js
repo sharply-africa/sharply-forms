@@ -16,8 +16,8 @@ import {
 } from "skylos-ui";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { DeliveryFee, PricePicker } from "components";
 import { orderSchema } from "schemas";
-import { DeliveryFee, PricePicker } from "src/components";
 
 export const CustomerOrderForm = ({
   buttonText,

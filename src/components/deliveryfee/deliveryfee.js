@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Card, Stack, Text } from "skylos-ui";
 import { ReactComponent as MoneyIcon } from "icons/money.svg";
-import { formatAmount } from "src/lib/utils";
+import { formatAmount } from "lib/utils";
 
 export const DeliveryFee = ({ amount }) => {
   if (typeof amount === "undefined" || amount === null) return null;
