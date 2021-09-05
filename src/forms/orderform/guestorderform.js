@@ -1,13 +1,11 @@
 import React, { useCallback } from "react";
 import {
   Button,
-  Card,
   Checkbox,
   FormError,
   FormGroup,
   Input,
   Label,
-  Radio,
   Stack,
   Switch,
   TagsInput,
@@ -47,34 +45,6 @@ export const GuestOrderForm = ({
 
   return (
     <Stack as="form" spacing={6} onSubmit={handleSubmit(onSubmit)}>
-      <FormGroup>
-        <Label htmlFor="customer">You are the?</Label>
-
-        <Controller
-          control={control}
-          name="customer"
-          render={({ onChange, value }) => (
-            <Stack direction="row" spacing={4}>
-              <Card
-                onClick={() => onChange("sender")}
-                sx={{ boxShadow: "none" }}
-              >
-                <Radio title="Sender" active={value === "sender"} />
-              </Card>
-
-              <Card
-                onClick={() => onChange("recipient")}
-                sx={{ boxShadow: "none" }}
-              >
-                <Radio active={value === "recipient"} title="Receiver" />
-              </Card>
-            </Stack>
-          )}
-        />
-
-        <FormError error={errors?.customer?.message} />
-      </FormGroup>
-
       <Controller
         control={control}
         name="deliveryArea"
@@ -122,7 +92,7 @@ export const GuestOrderForm = ({
         <Input
           id="sender.email"
           name="sender.email"
-          placeholder="Type Email Address (Optional)"
+          placeholder="Type Email Address"
           ref={register}
         />
         <FormError error={errors?.sender?.email?.message} />
