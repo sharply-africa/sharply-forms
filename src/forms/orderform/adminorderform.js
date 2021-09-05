@@ -44,7 +44,6 @@ export const AdminOrderForm = ({
     pricelists,
   ]);
 
-  console.log({ errors });
 
   const showDescription = watch("allowDescription");
   const priceID = watch("deliveryArea");
