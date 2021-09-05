@@ -21,7 +21,6 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
     }),
     sender: yup.object().shape({
       address: yup.string().required("Address is required"),
-      email: yup.string().email("Email is invalid"),
       ...(requiredSender
         ? {
             name: yup.string().required("Name is required"),
@@ -29,15 +28,19 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
               .string()
               .phone()
               .required("Phone number is required"),
+            email: yup
+              .string()
+              .email("Email is invalid")
+              .required("Email is required"),
           }
         : {
             name: yup.string(),
             phoneNumber: yup.string().phone(),
+            email: yup.string().email("Email is invalid"),
           }),
     }),
     ...(isAdmin
       ? {
-          deliveryFee: yup.string().required("Delivery amount is required"),
           rider: yup.string().required("Please select rider"),
         }
       : {}),

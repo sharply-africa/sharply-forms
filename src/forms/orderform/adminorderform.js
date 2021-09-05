@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   Button,
   Checkbox,
@@ -15,12 +15,14 @@ import {
 } from "skylos-ui";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { DeliveryFee, PricePicker } from "components";
 import { orderSchema } from "schemas";
 
 export const AdminOrderForm = ({
   buttonText,
   isLoading,
   onSubmit,
+  pricelists,
   riders,
   schema,
 }) => {
@@ -38,7 +40,15 @@ export const AdminOrderForm = ({
     },
   });
 
+  const getPrice = useCallback((id) => pricelists.find((x) => x._id === id), [
+    pricelists,
+  ]);
+
+  console.log({ errors });
+
   const showDescription = watch("allowDescription");
+  const priceID = watch("deliveryArea");
+  const selectedPrice = getPrice(priceID);
 
   return (
     <Stack as="form" spacing={6} onSubmit={handleSubmit(onSubmit)}>
@@ -80,6 +90,20 @@ export const AdminOrderForm = ({
         />
         <FormError error={errors?.sender?.email?.message} />
       </FormGroup>
+
+      <Controller
+        control={control}
+        name="deliveryArea"
+        render={({ onChange, value }) => (
+          <PricePicker
+            error={errors?.deliveryArea?.message}
+            getPrice={getPrice}
+            onChange={onChange}
+            pricelists={pricelists}
+            value={value}
+          />
+        )}
+      />
 
       <FormGroup>
         <Label htmlFor="sender.address">Pick Up Address</Label>
@@ -175,16 +199,7 @@ export const AdminOrderForm = ({
         <FormError error={errors?.recipient?.phoneNumber?.message} />
       </FormGroup>
 
-      <FormGroup>
-        <Label htmlFor="deliveryFee">Delivery Amount</Label>
-        <Input
-          id="deliveryFee"
-          name="deliveryFee"
-          placeholder="NGN"
-          ref={register}
-        />
-        <FormError error={errors?.deliveryFee?.message} />
-      </FormGroup>
+      <DeliveryFee amount={selectedPrice?.amount} />
 
       <FormGroup>
         <Controller
@@ -276,6 +291,7 @@ AdminOrderForm.defaultProps = {
   buttonText: "Submit Request",
   isLoading: false,
   onSubmit: () => {},
+  pricelists: [],
   riders: [],
   schema: null,
 };

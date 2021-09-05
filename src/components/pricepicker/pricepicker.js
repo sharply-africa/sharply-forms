@@ -8,7 +8,6 @@ import {
   FormGroup,
   Input,
   Label,
-  Spinner,
   Stack,
   Text,
 } from "skylos-ui";
@@ -17,7 +16,6 @@ import { useClickAway, useModal } from "./hooks";
 export const PricePicker = ({
   error,
   getPrice,
-  isLoading,
   label,
   name,
   onChange,
@@ -53,7 +51,7 @@ export const PricePicker = ({
         <FormError error={error} />
       </FormGroup>
 
-      {Boolean(pricelists.length) && isOpen && (
+      {isOpen && (
         <Stack
           alignItems="stretch"
           as={Card}
@@ -70,9 +68,16 @@ export const PricePicker = ({
           }}
           width="100%"
         >
-          {isLoading && (
-            <Flex alignItems="center" justifyContent="center" py={3}>
-              <Spinner />
+          {!Boolean(pricelists.length) && (
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              py={3}
+              flexDirection="column"
+            >
+              <Text textAlign="center" variant="thickText">
+                No delivery areas available
+              </Text>
             </Flex>
           )}
 
