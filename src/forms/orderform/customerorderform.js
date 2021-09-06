@@ -161,17 +161,6 @@ export const CustomerOrderForm = ({
       {isAdmin ? (
         <>
           <FormGroup>
-            <Label htmlFor="deliveryFee">Delivery Amount</Label>
-            <Input
-              id="deliveryFee"
-              name="deliveryFee"
-              placeholder="NGN"
-              ref={register}
-            />
-            <FormError error={errors?.deliveryFee?.message} />
-          </FormGroup>
-
-          <FormGroup>
             <Controller
               control={control}
               name="payOnDelivery"
@@ -222,9 +211,9 @@ export const CustomerOrderForm = ({
           </Select>
           <FormError error={errors?.rider?.message} />
         </FormGroup>
-      ) : (
-        <DeliveryFee amount={selectedPrice?.amount} />
-      )}
+      ) : null}
+
+      <DeliveryFee amount={selectedPrice?.amount} />
 
       <Button
         defaultRightIcon

@@ -44,7 +44,6 @@ export const AdminOrderForm = ({
     pricelists,
   ]);
 
-
   const showDescription = watch("allowDescription");
   const priceID = watch("deliveryArea");
   const selectedPrice = getPrice(priceID);
@@ -84,7 +83,7 @@ export const AdminOrderForm = ({
         <Input
           id="sender.email"
           name="sender.email"
-          placeholder="Type Email Address (Optional)"
+          placeholder="Type Email Address"
           ref={register}
         />
         <FormError error={errors?.sender?.email?.message} />
