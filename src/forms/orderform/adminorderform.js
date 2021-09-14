@@ -207,7 +207,7 @@ export const AdminOrderForm = ({
             <Switch
               active={value}
               onChange={onChange}
-              title="The item will be paid for on delivery"
+              title="Delivery fee paid"
             />
           )}
         />
@@ -221,7 +221,7 @@ export const AdminOrderForm = ({
             <Switch
               active={value}
               onChange={onChange}
-              title="The Receiver will be paying for delivery"
+              title="The Receiver will be paying cash on delivery"
             />
           )}
         />
