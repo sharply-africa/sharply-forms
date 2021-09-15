@@ -35,7 +35,7 @@ export const AdminOrderForm = ({
       chargeRecipient: false,
       customer: "sender",
       items: [],
-      payOnDelivery: false,
+      payOnDelivery: true,
       rider: "",
     },
   });
@@ -206,15 +206,15 @@ export const AdminOrderForm = ({
           name="payOnDelivery"
           render={({ onChange, value }) => (
             <Switch
-              active={value}
-              onChange={onChange}
+              active={!value}
+              onChange={(v) => onChange(!v)}
               title="Delivery fee paid"
             />
           )}
         />
       </FormGroup>
 
-      {!payOnDelivery && (
+      {payOnDelivery && (
         <FormGroup>
           <Controller
             control={control}
