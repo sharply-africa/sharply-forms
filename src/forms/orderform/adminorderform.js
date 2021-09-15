@@ -45,6 +45,7 @@ export const AdminOrderForm = ({
   ]);
 
   const showDescription = watch("allowDescription");
+  const payOnDelivery = watch("payOnDelivery");
   const priceID = watch("deliveryArea");
   const selectedPrice = getPrice(priceID);
 
@@ -213,19 +214,21 @@ export const AdminOrderForm = ({
         />
       </FormGroup>
 
-      <FormGroup>
-        <Controller
-          control={control}
-          name="chargeRecipient"
-          render={({ onChange, value }) => (
-            <Switch
-              active={value}
-              onChange={onChange}
-              title="The Receiver will be paying cash on delivery"
-            />
-          )}
-        />
-      </FormGroup>
+      {!payOnDelivery && (
+        <FormGroup>
+          <Controller
+            control={control}
+            name="chargeRecipient"
+            render={({ onChange, value }) => (
+              <Switch
+                active={value}
+                onChange={onChange}
+                title="The Receiver will be paying cash on delivery"
+              />
+            )}
+          />
+        </FormGroup>
+      )}
 
       <FormGroup>
         <Label htmlFor="rider">Assign Rider</Label>
