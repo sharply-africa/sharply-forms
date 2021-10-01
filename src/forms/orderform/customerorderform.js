@@ -62,6 +62,7 @@ export const CustomerOrderForm = ({
         <FormGroup>
           <Label htmlFor="sender.name">Sender Name</Label>
           <Input
+            key="sender.name"
             id="sender.name"
             name="sender.name"
             placeholder="Type Name"
@@ -73,10 +74,12 @@ export const CustomerOrderForm = ({
         <FormGroup>
           <Label htmlFor="sender.phoneNumber">Sender Number</Label>
           <Controller
+            key="control.sender.phoneNumber"
             control={control}
             name="sender.phoneNumber"
             render={(props) => (
               <Input
+                key="sender.phoneNumber"
                 id="sender.phoneNumber"
                 onlyCountries={["ng"]}
                 type="phone"
@@ -228,6 +231,7 @@ export const CustomerOrderForm = ({
           <FormGroup>
             <Label htmlFor="recipient.name">Receiver Name</Label>
             <Input
+              key="recipient.name"
               id="recipient.name"
               name="recipient.name"
               placeholder="Type Name"
@@ -240,9 +244,11 @@ export const CustomerOrderForm = ({
             <Label htmlFor="recipient.phoneNumber">Receiver Number</Label>
             <Controller
               control={control}
+              key="control.recipient.phoneNumber"
               name="recipient.phoneNumber"
               render={(props) => (
                 <Input
+                  key="recipient.phoneNumber"
                   id="recipient.phoneNumber"
                   onlyCountries={["ng"]}
                   type="phone"
