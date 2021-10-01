@@ -2,10 +2,11 @@ import * as yup from "yup";
 import "lib/yup-phone";
 import { CUSTOMER_TYPES } from "data";
 
-const checkIfRequiredTest = (_, context) => {
+const checkIfRequiredTest = (value, context) => {
   const { customer } = context.from[1].value;
-  return ![CUSTOMER_TYPES.$RECIPIENT, CUSTOMER_TYPES.$3RD_PARTY].includes(
-    customer
+  return (
+    [CUSTOMER_TYPES.$RECIPIENT, CUSTOMER_TYPES.$3RD_PARTY].includes(customer) &&
+    value
   );
 };
 

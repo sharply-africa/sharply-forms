@@ -9,7 +9,6 @@ import {
   Input,
   Label,
   Radio,
-  Select,
   Stack,
   Switch,
   TagsInput,
@@ -33,21 +32,17 @@ export const CustomerOrderForm = ({
   isLoading,
   onSubmit,
   pricelists,
-  riders,
   schema,
-  type,
 }) => {
-  const isAdmin = type === "admin";
   const { register, handleSubmit, errors, control, watch } = useForm({
     resolver: yupResolver(
-      schema || orderSchema({ isAdmin, requiredSender: false })
+      schema || orderSchema({ isAdmin: false, requiredSender: false })
     ),
     defaultValues: {
       allowDescription: false,
       chargeRecipient: false,
       customer: "sender",
       items: [],
-      payOnDelivery: true,
       rider: "",
     },
   });
@@ -57,7 +52,6 @@ export const CustomerOrderForm = ({
   ]);
 
   const showDescription = watch("allowDescription");
-  const payOnDelivery = watch("payOnDelivery");
   const priceID = watch("deliveryArea");
   const customerType = watch("customer");
   const selectedPrice = getPrice(priceID);
@@ -96,8 +90,12 @@ export const CustomerOrderForm = ({
     );
   };
 
+  const onSub = (form) => {
+    console.log(form);
+  };
+
   return (
-    <Stack as="form" spacing={6} onSubmit={handleSubmit(onSubmit)}>
+    <Stack as="form" spacing={6} onSubmit={handleSubmit(onSub)}>
       <FormGroup>
         <Label htmlFor="customer">You are the?</Label>
 
@@ -257,73 +255,26 @@ export const CustomerOrderForm = ({
         </>
       )}
 
-      {isAdmin ? (
-        <>
-          <FormGroup>
-            <Controller
-              control={control}
-              name="payOnDelivery"
-              render={({ onChange, value }) => (
-                <Switch
-                  active={!value}
-                  onChange={(v) => onChange(!v)}
-                  title="Delivery fee paid"
-                />
-              )}
+      <FormGroup>
+        <Controller
+          control={control}
+          name="chargeRecipient"
+          render={({ onChange, value }) => (
+            <Switch
+              active={value}
+              onChange={onChange}
+              title={"Payment on delivery"}
             />
-          </FormGroup>
-        </>
-      ) : null}
-
-      {(!isAdmin || (isAdmin && payOnDelivery)) && (
-        <FormGroup>
-          <Controller
-            control={control}
-            name="chargeRecipient"
-            render={({ onChange, value }) => (
-              <Switch
-                active={value}
-                onChange={onChange}
-                title={
-                  isAdmin
-                    ? "The Receiver will be paying cash on delivery"
-                    : "Payment on delivery"
-                }
-              />
-            )}
-          />
-        </FormGroup>
-      )}
-
-      {isAdmin ? (
-        <FormGroup>
-          <Label htmlFor="rider">Assign Rider</Label>
-          <Select
-            id="rider"
-            name="rider"
-            placeholder="Select option"
-            ref={register}
-          >
-            <option value="" disabled>
-              Select Option
-            </option>
-
-            {riders?.map((rider) => (
-              <option key={rider.id} value={rider.id}>
-                {rider.name}
-              </option>
-            ))}
-          </Select>
-          <FormError error={errors?.rider?.message} />
-        </FormGroup>
-      ) : null}
+          )}
+        />
+      </FormGroup>
 
       <DeliveryFee amount={selectedPrice?.amount} />
 
       <Button
         defaultRightIcon
         isLoading={isLoading}
-        onClick={handleSubmit(onSubmit)}
+        onClick={handleSubmit(onSub)}
       >
         {buttonText}
       </Button>
@@ -334,9 +285,10 @@ export const CustomerOrderForm = ({
 CustomerOrderForm.defaultProps = {
   buttonText: "Submit Request",
   isLoading: false,
-  onSubmit: () => {},
+  onSubmit: (data) => {
+    console.log({ data });
+  },
   pricelists: [],
-  riders: [],
+
   schema: null,
-  type: "client",
 };
