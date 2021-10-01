@@ -1,14 +1,11 @@
 import React, { useCallback } from "react";
 import {
   Button,
-  Card,
   Checkbox,
-  Flex,
   FormError,
   FormGroup,
   Input,
   Label,
-  Radio,
   Select,
   Stack,
   Switch,
@@ -18,17 +15,9 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DeliveryFee, PricePicker } from "components";
-import { CUSTOMER_TYPES } from "data";
 import { orderSchema } from "schemas";
 
-const cardStyles = {
-  boxShadow: "none",
-  flexShrink: 0,
-  mb: 4,
-  mr: 4,
-};
-
-export const CustomerOrderForm = ({
+export const AdminCustomerOrderForm = ({
   buttonText,
   isLoading,
   onSubmit,
@@ -59,89 +48,10 @@ export const CustomerOrderForm = ({
   const showDescription = watch("allowDescription");
   const payOnDelivery = watch("payOnDelivery");
   const priceID = watch("deliveryArea");
-  const customerType = watch("customer");
   const selectedPrice = getPrice(priceID);
-
-  const senderFields = () => {
-    return (
-      <>
-        <FormGroup>
-          <Label htmlFor="sender.name">Sender Name</Label>
-          <Input
-            id="sender.name"
-            name="sender.name"
-            placeholder="Type Name"
-            ref={register}
-          />
-          <FormError error={errors?.sender?.name?.message} />
-        </FormGroup>
-
-        <FormGroup>
-          <Label htmlFor="sender.phoneNumber">Sender Number</Label>
-          <Controller
-            control={control}
-            name="sender.phoneNumber"
-            render={(props) => (
-              <Input
-                id="sender.phoneNumber"
-                onlyCountries={["ng"]}
-                type="phone"
-                {...props}
-              />
-            )}
-          />
-          <FormError error={errors?.sender?.phoneNumber?.message} />
-        </FormGroup>
-      </>
-    );
-  };
 
   return (
     <Stack as="form" spacing={6} onSubmit={handleSubmit(onSubmit)}>
-      <FormGroup>
-        <Label htmlFor="customer">You are the?</Label>
-
-        <Controller
-          control={control}
-          name="customer"
-          render={({ onChange, value }) => (
-            <Flex flexDirection="row" flexWrap="wrap" mb={-4}>
-              <Card
-                onClick={() => onChange(CUSTOMER_TYPES.$SENDER)}
-                sx={cardStyles}
-              >
-                <Radio
-                  active={value === CUSTOMER_TYPES.$SENDER}
-                  title="Sender"
-                />
-              </Card>
-
-              <Card
-                onClick={() => onChange(CUSTOMER_TYPES.$RECIPIENT)}
-                sx={cardStyles}
-              >
-                <Radio
-                  active={value === CUSTOMER_TYPES.$RECIPIENT}
-                  title="Receiver"
-                />
-              </Card>
-
-              <Card
-                onClick={() => onChange(CUSTOMER_TYPES.$3RD_PARTY)}
-                sx={cardStyles}
-              >
-                <Radio
-                  active={value === CUSTOMER_TYPES.$3RD_PARTY}
-                  title="3rd Party"
-                />
-              </Card>
-            </Flex>
-          )}
-        />
-
-        <FormError error={errors?.customer?.message} />
-      </FormGroup>
-
       <Controller
         control={control}
         name="deliveryArea"
@@ -155,8 +65,6 @@ export const CustomerOrderForm = ({
           />
         )}
       />
-
-      {customerType === CUSTOMER_TYPES.$3RD_PARTY ? senderFields() : null}
 
       <FormGroup>
         <Label htmlFor="sender.address">Pick Up Address</Label>
@@ -223,39 +131,33 @@ export const CustomerOrderForm = ({
         </FormGroup>
       ) : null}
 
-      {customerType === CUSTOMER_TYPES.$RECIPIENT ? (
-        senderFields()
-      ) : (
-        <>
-          <FormGroup>
-            <Label htmlFor="recipient.name">Receiver Name</Label>
-            <Input
-              id="recipient.name"
-              name="recipient.name"
-              placeholder="Type Name"
-              ref={register}
-            />
-            <FormError error={errors?.recipient?.name?.message} />
-          </FormGroup>
+      <FormGroup>
+        <Label htmlFor="recipient.name">Receiver Name</Label>
+        <Input
+          id="recipient.name"
+          name="recipient.name"
+          placeholder="Type Name"
+          ref={register}
+        />
+        <FormError error={errors?.recipient?.name?.message} />
+      </FormGroup>
 
-          <FormGroup>
-            <Label htmlFor="recipient.phoneNumber">Receiver Number</Label>
-            <Controller
-              control={control}
-              name="recipient.phoneNumber"
-              render={(props) => (
-                <Input
-                  id="recipient.phoneNumber"
-                  onlyCountries={["ng"]}
-                  type="phone"
-                  {...props}
-                />
-              )}
+      <FormGroup>
+        <Label htmlFor="recipient.phoneNumber">Receiver Number</Label>
+        <Controller
+          control={control}
+          name="recipient.phoneNumber"
+          render={(props) => (
+            <Input
+              id="recipient.phoneNumber"
+              onlyCountries={["ng"]}
+              type="phone"
+              {...props}
             />
-            <FormError error={errors?.recipient?.phoneNumber?.message} />
-          </FormGroup>
-        </>
-      )}
+          )}
+        />
+        <FormError error={errors?.recipient?.phoneNumber?.message} />
+      </FormGroup>
 
       {isAdmin ? (
         <>
@@ -331,7 +233,7 @@ export const CustomerOrderForm = ({
   );
 };
 
-CustomerOrderForm.defaultProps = {
+AdminCustomerOrderForm.defaultProps = {
   buttonText: "Submit Request",
   isLoading: false,
   onSubmit: () => {},

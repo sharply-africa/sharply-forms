@@ -11,3 +11,14 @@ yup.addMethod(yup.string, "phone", function () {
     }
   );
 });
+
+yup.addMethod(yup.mixed, "phone", function () {
+  return this.test(
+    "phone",
+    "Phone number is not a valid Nigerian number",
+    (value) => {
+      if (value) return parsePhoneNumberFromString(value, "NG")?.isValid();
+      return true;
+    }
+  );
+});

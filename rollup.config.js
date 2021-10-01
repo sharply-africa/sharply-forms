@@ -26,6 +26,7 @@ export default {
     alias({
       entries: [
         { find: "components", replacement: `${srcDir}/components` },
+        { find: "data", replacement: `${srcDir}/data` },
         { find: "forms", replacement: `${srcDir}/forms` },
         { find: "icons", replacement: `${srcDir}/icons` },
         { find: "lib", replacement: `${srcDir}/lib` },
