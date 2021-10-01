@@ -93,12 +93,8 @@ export const CustomerOrderForm = ({
     );
   };
 
-  const onSub = (form) => {
-    console.log(form);
-  };
-
   return (
-    <Stack as="form" spacing={6} onSubmit={handleSubmit(onSub)}>
+    <Stack as="form" spacing={6} onSubmit={handleSubmit(onSubmit)}>
       <FormGroup>
         <Label htmlFor="customer">You are the?</Label>
 
@@ -280,7 +276,7 @@ export const CustomerOrderForm = ({
       <Button
         defaultRightIcon
         isLoading={isLoading}
-        onClick={handleSubmit(onSub)}
+        onClick={handleSubmit(onSubmit)}
       >
         {buttonText}
       </Button>
@@ -291,9 +287,7 @@ export const CustomerOrderForm = ({
 CustomerOrderForm.defaultProps = {
   buttonText: "Submit Request",
   isLoading: false,
-  onSubmit: (data) => {
-    console.log({ data });
-  },
+  onSubmit: () => {},
   pricelists: [],
 
   schema: null,
