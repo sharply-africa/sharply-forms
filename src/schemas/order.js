@@ -1,14 +1,5 @@
 import * as yup from "yup";
 import "lib/yup-phone";
-import { CUSTOMER_TYPES } from "data";
-
-const checkIfRequiredTest = (value, context) => {
-  const { customer } = context.from[1].value;
-  return (
-    [CUSTOMER_TYPES.$RECIPIENT, CUSTOMER_TYPES.$3RD_PARTY].includes(customer) &&
-    value
-  );
-};
 
 export const orderSchema = ({ isAdmin, requiredSender }) =>
   yup.object().shape({
@@ -43,18 +34,8 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
               .required("Email is required"),
           }
         : {
-            name: yup
-              .mixed()
-              .test("testname", "Name is required", checkIfRequiredTest),
-
-            phoneNumber: yup
-              .mixed()
-              .phone()
-              .test(
-                "testname",
-                "Phone number is required",
-                checkIfRequiredTest
-              ),
+            name: yup.string(),
+            phoneNumber: yup.string().phone(),
             email: yup.string().email("Email is invalid"),
           }),
     }),

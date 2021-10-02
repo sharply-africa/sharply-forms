@@ -18,7 +18,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DeliveryFee, PricePicker } from "components";
 import { CUSTOMER_TYPES } from "data";
-import { orderSchema } from "schemas";
+import { customerOrderSchema } from "schemas";
 
 const cardStyles = {
   boxShadow: "none",
@@ -35,9 +35,7 @@ export const CustomerOrderForm = ({
   schema,
 }) => {
   const { register, handleSubmit, errors, control, watch } = useForm({
-    resolver: yupResolver(
-      schema || orderSchema({ isAdmin: false, requiredSender: false })
-    ),
+    resolver: yupResolver(schema || customerOrderSchema),
     defaultValues: {
       allowDescription: false,
       chargeRecipient: false,
