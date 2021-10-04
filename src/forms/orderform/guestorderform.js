@@ -1,11 +1,14 @@
 import React, { useCallback } from "react";
 import {
   Button,
+  Card,
   Checkbox,
+  Flex,
   FormError,
   FormGroup,
   Input,
   Label,
+  Radio,
   Stack,
   Switch,
   TagsInput,
@@ -14,7 +17,15 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DeliveryFee, PricePicker } from "components";
+import { CUSTOMER_TYPES } from "data";
 import { orderSchema } from "schemas";
+
+const cardStyles = {
+  boxShadow: "none",
+  flexShrink: 0,
+  mb: 4,
+  mr: 4,
+};
 
 export const GuestOrderForm = ({
   buttonText,
@@ -30,7 +41,7 @@ export const GuestOrderForm = ({
     defaultValues: {
       allowDescription: false,
       chargeRecipient: false,
-      customer: "sender",
+      requestedBy: "sender",
       items: [],
     },
   });
@@ -45,6 +56,50 @@ export const GuestOrderForm = ({
 
   return (
     <Stack as="form" spacing={6} onSubmit={handleSubmit(onSubmit)}>
+      <FormGroup>
+        <Label htmlFor="requestedBy">You are the?</Label>
+
+        <Controller
+          control={control}
+          name="requestedBy"
+          render={({ onChange, value }) => (
+            <Flex flexDirection="row" flexWrap="wrap" mb={-4}>
+              <Card
+                onClick={() => onChange(CUSTOMER_TYPES.$SENDER)}
+                sx={cardStyles}
+              >
+                <Radio
+                  active={value === CUSTOMER_TYPES.$SENDER}
+                  title="Sender"
+                />
+              </Card>
+
+              <Card
+                onClick={() => onChange(CUSTOMER_TYPES.$RECIPIENT)}
+                sx={cardStyles}
+              >
+                <Radio
+                  active={value === CUSTOMER_TYPES.$RECIPIENT}
+                  title="Receiver"
+                />
+              </Card>
+
+              <Card
+                onClick={() => onChange(CUSTOMER_TYPES.$3RD_PARTY)}
+                sx={cardStyles}
+              >
+                <Radio
+                  active={value === CUSTOMER_TYPES.$3RD_PARTY}
+                  title="3rd Party"
+                />
+              </Card>
+            </Flex>
+          )}
+        />
+
+        <FormError error={errors?.requestedBy?.message} />
+      </FormGroup>
+
       <Controller
         control={control}
         name="deliveryArea"

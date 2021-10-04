@@ -3,10 +3,10 @@ import "lib/yup-phone";
 import { CUSTOMER_TYPES } from "data";
 
 const checkIfSenderRequiredTest = (value, context) => {
-  const { customer } = context.from[1].value;
+  const { requestedBy } = context.from[1].value;
 
   if (
-    [CUSTOMER_TYPES.$RECIPIENT, CUSTOMER_TYPES.$3RD_PARTY].includes(customer)
+    [CUSTOMER_TYPES.$RECIPIENT, CUSTOMER_TYPES.$3RD_PARTY].includes(requestedBy)
   ) {
     return Boolean(value);
   }
@@ -15,9 +15,9 @@ const checkIfSenderRequiredTest = (value, context) => {
 };
 
 const checkIfRecipientRequiredTest = (value, context) => {
-  const { customer } = context.from[1].value;
+  const { requestedBy } = context.from[1].value;
 
-  if (CUSTOMER_TYPES.$SENDER === customer) {
+  if (CUSTOMER_TYPES.$SENDER === requestedBy) {
     return Boolean(value);
   }
 
@@ -28,7 +28,7 @@ export const customerOrderSchema = yup.object().shape({
   allowDescription: yup.boolean(),
   chargeRecipient: yup.boolean(),
   payOnDelivery: yup.boolean(),
-  customer: yup.string(),
+  requestedBy: yup.string(),
   deliveryArea: yup.string().required("Delivery area is required"),
   description: yup.string(),
   items: yup

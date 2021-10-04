@@ -39,7 +39,7 @@ export const CustomerOrderForm = ({
     defaultValues: {
       allowDescription: false,
       chargeRecipient: false,
-      customer: "sender",
+      requestedBy: "sender",
       items: [],
       rider: "",
     },
@@ -51,7 +51,7 @@ export const CustomerOrderForm = ({
 
   const showDescription = watch("allowDescription");
   const priceID = watch("deliveryArea");
-  const customerType = watch("customer");
+  const requestedBy = watch("requestedBy");
   const selectedPrice = getPrice(priceID);
 
   const senderFields = () => {
@@ -94,11 +94,11 @@ export const CustomerOrderForm = ({
   return (
     <Stack as="form" spacing={6} onSubmit={handleSubmit(onSubmit)}>
       <FormGroup>
-        <Label htmlFor="customer">You are the?</Label>
+        <Label htmlFor="requestedBy">You are the?</Label>
 
         <Controller
           control={control}
-          name="customer"
+          name="requestedBy"
           render={({ onChange, value }) => (
             <Flex flexDirection="row" flexWrap="wrap" mb={-4}>
               <Card
@@ -134,7 +134,7 @@ export const CustomerOrderForm = ({
           )}
         />
 
-        <FormError error={errors?.customer?.message} />
+        <FormError error={errors?.requestedBy?.message} />
       </FormGroup>
 
       <Controller
@@ -151,7 +151,7 @@ export const CustomerOrderForm = ({
         )}
       />
 
-      {customerType === CUSTOMER_TYPES.$3RD_PARTY ? senderFields() : null}
+      {requestedBy === CUSTOMER_TYPES.$3RD_PARTY ? senderFields() : null}
 
       <FormGroup>
         <Label htmlFor="sender.address">Pick Up Address</Label>
@@ -218,7 +218,7 @@ export const CustomerOrderForm = ({
         </FormGroup>
       ) : null}
 
-      {customerType === CUSTOMER_TYPES.$RECIPIENT ? (
+      {requestedBy === CUSTOMER_TYPES.$RECIPIENT ? (
         senderFields()
       ) : (
         <>
