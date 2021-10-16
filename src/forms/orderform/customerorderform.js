@@ -35,7 +35,7 @@ export const CustomerOrderForm = ({
   schema,
 }) => {
   const { register, handleSubmit, errors, control, watch } = useForm({
-    resolver: yupResolver(schema || customerOrderSchema),
+    resolver: yupResolver(schema || customerOrderSchema(false)),
     defaultValues: {
       allowDescription: false,
       chargeRecipient: false,

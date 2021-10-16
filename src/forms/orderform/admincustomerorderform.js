@@ -1,11 +1,14 @@
 import React, { useCallback } from "react";
 import {
   Button,
+  Card,
   Checkbox,
+  Flex,
   FormError,
   FormGroup,
   Input,
   Label,
+  Radio,
   Select,
   Stack,
   Switch,
@@ -15,7 +18,15 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DeliveryFee, PricePicker } from "components";
-import { orderSchema } from "schemas";
+import { CUSTOMER_TYPES } from "data";
+import { customerOrderSchema } from "schemas";
+
+const cardStyles = {
+  boxShadow: "none",
+  flexShrink: 0,
+  mb: 4,
+  mr: 4,
+};
 
 export const AdminCustomerOrderForm = ({
   buttonText,
@@ -24,17 +35,13 @@ export const AdminCustomerOrderForm = ({
   pricelists,
   riders,
   schema,
-  type,
 }) => {
-  const isAdmin = type === "admin";
   const { register, handleSubmit, errors, control, watch } = useForm({
-    resolver: yupResolver(
-      schema || orderSchema({ isAdmin, requiredSender: false })
-    ),
+    resolver: yupResolver(schema || customerOrderSchema(true)),
     defaultValues: {
       allowDescription: false,
       chargeRecipient: false,
-      customer: "sender",
+      requestedBy: "sender",
       items: [],
       payOnDelivery: true,
       rider: "",
@@ -48,10 +55,45 @@ export const AdminCustomerOrderForm = ({
   const showDescription = watch("allowDescription");
   const payOnDelivery = watch("payOnDelivery");
   const priceID = watch("deliveryArea");
+  const requestedBy = watch("requestedBy");
   const selectedPrice = getPrice(priceID);
 
   return (
     <Stack as="form" spacing={6} onSubmit={handleSubmit(onSubmit)}>
+      <FormGroup>
+        <Label htmlFor="requestedBy">Customer is the the?</Label>
+
+        <Controller
+          control={control}
+          name="requestedBy"
+          render={({ onChange, value }) => (
+            <Flex flexDirection="row" flexWrap="wrap" mb={-4}>
+              <Card
+                onClick={() => onChange(CUSTOMER_TYPES.$SENDER)}
+                sx={cardStyles}
+              >
+                <Radio
+                  active={value === CUSTOMER_TYPES.$SENDER}
+                  title="Sender"
+                />
+              </Card>
+
+              <Card
+                onClick={() => onChange(CUSTOMER_TYPES.$RECIPIENT)}
+                sx={cardStyles}
+              >
+                <Radio
+                  active={value === CUSTOMER_TYPES.$RECIPIENT}
+                  title="Receiver"
+                />
+              </Card>
+            </Flex>
+          )}
+        />
+
+        <FormError error={errors?.requestedBy?.message} />
+      </FormGroup>
+
       <Controller
         control={control}
         name="deliveryArea"
@@ -65,6 +107,41 @@ export const AdminCustomerOrderForm = ({
           />
         )}
       />
+
+      {requestedBy === CUSTOMER_TYPES.$RECIPIENT && (
+        <>
+          <FormGroup>
+            <Label htmlFor="sender.name">Sender Name</Label>
+            <Input
+              key="sender.name"
+              id="sender.name"
+              name="sender.name"
+              placeholder="Type Name"
+              ref={register}
+            />
+            <FormError error={errors?.sender?.name?.message} />
+          </FormGroup>
+
+          <FormGroup>
+            <Label htmlFor="sender.phoneNumber">Sender Number</Label>
+            <Controller
+              key="control.sender.phoneNumber"
+              control={control}
+              name="sender.phoneNumber"
+              render={(props) => (
+                <Input
+                  key="sender.phoneNumber"
+                  id="sender.phoneNumber"
+                  onlyCountries={["ng"]}
+                  type="phone"
+                  {...props}
+                />
+              )}
+            />
+            <FormError error={errors?.sender?.phoneNumber?.message} />
+          </FormGroup>
+        </>
+      )}
 
       <FormGroup>
         <Label htmlFor="sender.address">Pick Up Address</Label>
@@ -131,53 +208,53 @@ export const AdminCustomerOrderForm = ({
         </FormGroup>
       ) : null}
 
-      <FormGroup>
-        <Label htmlFor="recipient.name">Receiver Name</Label>
-        <Input
-          id="recipient.name"
-          name="recipient.name"
-          placeholder="Type Name"
-          ref={register}
-        />
-        <FormError error={errors?.recipient?.name?.message} />
-      </FormGroup>
-
-      <FormGroup>
-        <Label htmlFor="recipient.phoneNumber">Receiver Number</Label>
-        <Controller
-          control={control}
-          name="recipient.phoneNumber"
-          render={(props) => (
-            <Input
-              id="recipient.phoneNumber"
-              onlyCountries={["ng"]}
-              type="phone"
-              {...props}
-            />
-          )}
-        />
-        <FormError error={errors?.recipient?.phoneNumber?.message} />
-      </FormGroup>
-
-      {isAdmin ? (
+      {requestedBy === CUSTOMER_TYPES.$SENDER && (
         <>
           <FormGroup>
+            <Label htmlFor="recipient.name">Receiver Name</Label>
+            <Input
+              id="recipient.name"
+              name="recipient.name"
+              placeholder="Type Name"
+              ref={register}
+            />
+            <FormError error={errors?.recipient?.name?.message} />
+          </FormGroup>
+
+          <FormGroup>
+            <Label htmlFor="recipient.phoneNumber">Receiver Number</Label>
             <Controller
               control={control}
-              name="payOnDelivery"
-              render={({ onChange, value }) => (
-                <Switch
-                  active={!value}
-                  onChange={(v) => onChange(!v)}
-                  title="Delivery fee paid"
+              name="recipient.phoneNumber"
+              render={(props) => (
+                <Input
+                  id="recipient.phoneNumber"
+                  onlyCountries={["ng"]}
+                  type="phone"
+                  {...props}
                 />
               )}
             />
+            <FormError error={errors?.recipient?.phoneNumber?.message} />
           </FormGroup>
         </>
-      ) : null}
+      )}
 
-      {(!isAdmin || (isAdmin && payOnDelivery)) && (
+      <FormGroup>
+        <Controller
+          control={control}
+          name="payOnDelivery"
+          render={({ onChange, value }) => (
+            <Switch
+              active={!value}
+              onChange={(v) => onChange(!v)}
+              title="Delivery fee paid"
+            />
+          )}
+        />
+      </FormGroup>
+
+      {payOnDelivery && (
         <FormGroup>
           <Controller
             control={control}
@@ -186,39 +263,33 @@ export const AdminCustomerOrderForm = ({
               <Switch
                 active={value}
                 onChange={onChange}
-                title={
-                  isAdmin
-                    ? "The Receiver will be paying cash on delivery"
-                    : "Payment on delivery"
-                }
+                title="The Receiver will be paying cash on delivery"
               />
             )}
           />
         </FormGroup>
       )}
 
-      {isAdmin ? (
-        <FormGroup>
-          <Label htmlFor="rider">Assign Rider</Label>
-          <Select
-            id="rider"
-            name="rider"
-            placeholder="Select option"
-            ref={register}
-          >
-            <option value="" disabled>
-              Select Option
-            </option>
+      <FormGroup>
+        <Label htmlFor="rider">Assign Rider</Label>
+        <Select
+          id="rider"
+          name="rider"
+          placeholder="Select option"
+          ref={register}
+        >
+          <option value="" disabled>
+            Select Option
+          </option>
 
-            {riders?.map((rider) => (
-              <option key={rider.id} value={rider.id}>
-                {rider.name}
-              </option>
-            ))}
-          </Select>
-          <FormError error={errors?.rider?.message} />
-        </FormGroup>
-      ) : null}
+          {riders?.map((rider) => (
+            <option key={rider.id} value={rider.id}>
+              {rider.name}
+            </option>
+          ))}
+        </Select>
+        <FormError error={errors?.rider?.message} />
+      </FormGroup>
 
       <DeliveryFee amount={selectedPrice?.amount} />
 
@@ -240,5 +311,4 @@ AdminCustomerOrderForm.defaultProps = {
   pricelists: [],
   riders: [],
   schema: null,
-  type: "client",
 };
