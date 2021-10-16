@@ -97,9 +97,9 @@ export const PricePicker = ({
               }}
             >
               <Box>
-                <Text color="heading">{price.from.name}</Text>
+                <Text color="heading">{price?.from?.name}</Text>
                 <Text color="heading" fontSize="xxs">
-                  {price.from.coverage}
+                  {price?.from?.coverage}
                 </Text>
               </Box>
 
@@ -108,16 +108,16 @@ export const PricePicker = ({
               </Box>
 
               <Box>
-                <Text color="heading">{price.to.name}</Text>
+                <Text color="heading">{price?.to?.name}</Text>
                 <Text color="heading" fontSize="xxs">
-                  {price.to.coverage}
+                  {price?.to?.coverage}
                 </Text>
               </Box>
 
               <Text fontWeight="medium" color="heading">
-                {price.name}
+                {price?.name}
               </Text>
-              <Text fontSize="xs">{price.coverage}</Text>
+              <Text fontSize="xs">{price?.coverage}</Text>
             </Box>
           ))}
         </Stack>
