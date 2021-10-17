@@ -80,7 +80,7 @@ export const AdminOrderForm = ({
       </FormGroup>
 
       <FormGroup>
-        <Label htmlFor="sender.email">Senders Email</Label>
+        <Label htmlFor="sender.email">Senders Email (Optional)</Label>
         <Input
           id="sender.email"
           name="sender.email"

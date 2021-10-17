@@ -38,6 +38,11 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
             phoneNumber: yup.string().phone(),
             email: yup.string().email("Email is invalid"),
           }),
+      ...(isAdmin
+        ? {
+            email: yup.string().email("Email is invalid"),
+          }
+        : {}),
     }),
     ...(isAdmin
       ? {
