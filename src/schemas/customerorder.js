@@ -37,7 +37,11 @@ export const customerOrderSchema = (isAdmin) =>
       .min(1, "Please enter at least one item")
       .required("Item(s) are required"),
     recipient: yup.object().shape({
-      address: yup.string().required("Address is required"),
+      address: yup
+        .object()
+        .shape({})
+        .typeError("Address is required")
+        .required("Address is required"),
       name: yup
         .string()
         .test("testname", "Name is required", checkIfRecipientRequiredTest),
@@ -51,7 +55,11 @@ export const customerOrderSchema = (isAdmin) =>
         ),
     }),
     sender: yup.object().shape({
-      address: yup.string().required("Address is required"),
+      address: yup
+        .object()
+        .shape({})
+        .typeError("Address is required")
+        .required("Address is required"),
       name: yup
         .string()
         .test("testname", "Name is required", checkIfSenderRequiredTest),

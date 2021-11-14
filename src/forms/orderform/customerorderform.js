@@ -155,24 +155,40 @@ export const CustomerOrderForm = ({
 
       <FormGroup>
         <Label htmlFor="sender.address">Pick Up Address</Label>
-        <Input
-          id="sender.address"
+        <Controller
+          control={control}
           name="sender.address"
-          placeholder="Type Address"
-          type="address"
-          ref={register}
+          render={(field) => {
+            return (
+              <Input
+                id="sender.address"
+                type="address"
+                name="sender.address"
+                placeholder="Type Address"
+                {...field}
+              />
+            );
+          }}
         />
         <FormError error={errors?.sender?.address?.message} />
       </FormGroup>
 
       <FormGroup>
         <Label htmlFor="recipient.address">Receiver Address</Label>
-        <Input
-          id="recipient.address"
+        <Controller
+          control={control}
           name="recipient.address"
-          placeholder="Type Address"
-          type="address"
-          ref={register}
+          render={(field) => {
+            return (
+              <Input
+                id="recipient.address"
+                type="address"
+                name="recipient.address"
+                placeholder="Type Address"
+                {...field}
+              />
+            );
+          }}
         />
         <FormError error={errors?.recipient?.address?.message} />
       </FormGroup>

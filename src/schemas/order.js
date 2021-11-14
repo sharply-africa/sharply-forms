@@ -14,13 +14,21 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
       .min(1, "Please enter at least one item")
       .required("Item(s) are required"),
     recipient: yup.object().shape({
-      address: yup.string().required("Address is required"),
+      address: yup
+        .object()
+        .shape({})
+        .typeError("Address is required")
+        .required("Address is required"),
       email: yup.string().email("Email is invalid"),
       name: yup.string().required("Name is required"),
       phoneNumber: yup.string().phone().required("Phone number is required"),
     }),
     sender: yup.object().shape({
-      address: yup.string().required("Address is required"),
+      address: yup
+        .object()
+        .shape({})
+        .typeError("Address is required")
+        .required("Address is required"),
       ...(requiredSender
         ? {
             name: yup.string().required("Name is required"),
