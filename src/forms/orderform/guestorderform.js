@@ -10,7 +10,6 @@ import {
   Label,
   Radio,
   Stack,
-  Switch,
   TagsInput,
   Textarea,
 } from "skylos-ui";
@@ -40,7 +39,6 @@ export const GuestOrderForm = ({
     ),
     defaultValues: {
       allowDescription: false,
-      chargeRecipient: false,
       requestedBy: "sender",
       items: [],
     },
@@ -261,20 +259,6 @@ export const GuestOrderForm = ({
         />
 
         <FormError error={errors?.recipient?.phoneNumber?.message} />
-      </FormGroup>
-
-      <FormGroup>
-        <Controller
-          control={control}
-          name="chargeRecipient"
-          render={({ onChange, value }) => (
-            <Switch
-              active={value}
-              onChange={onChange}
-              title="The Receiver will be paying for delivery"
-            />
-          )}
-        />
       </FormGroup>
 
       <DeliveryFee amount={selectedPrice?.amount} />
