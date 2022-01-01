@@ -9,10 +9,7 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
     requestedBy: yup.string(),
     deliveryArea: yup.string().required("Delivery area is required"),
     description: yup.string(),
-    items: yup
-      .array()
-      .min(1, "Please enter at least one item")
-      .required("Item(s) are required"),
+    items: yup.string().required("Please enter at least one item"),
     recipient: yup.object().shape({
       address: yup
         .object()

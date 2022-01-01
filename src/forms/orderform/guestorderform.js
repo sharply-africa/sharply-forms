@@ -10,7 +10,6 @@ import {
   Label,
   Radio,
   Stack,
-  TagsInput,
   Textarea,
 } from "skylos-ui";
 import { useForm, Controller } from "react-hook-form";
@@ -40,7 +39,7 @@ export const GuestOrderForm = ({
     defaultValues: {
       allowDescription: false,
       requestedBy: "sender",
-      items: [],
+      items: "",
     },
   });
 
@@ -193,12 +192,12 @@ export const GuestOrderForm = ({
 
       <FormGroup>
         <Label htmlFor="items">Item(s)</Label>
-        <Controller
-          control={control}
+        <Input
+          key="items"
+          id="items"
           name="items"
-          render={({ onChange, value }) => (
-            <TagsInput value={value} onChange={onChange} />
-          )}
+          placeholder="Separate with commas"
+          ref={register}
         />
 
         <FormError error={errors?.items?.message} />

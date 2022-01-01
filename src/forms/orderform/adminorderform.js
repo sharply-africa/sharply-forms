@@ -10,7 +10,6 @@ import {
   Select,
   Stack,
   Switch,
-  TagsInput,
   Textarea,
 } from "skylos-ui";
 import { useForm, Controller } from "react-hook-form";
@@ -34,7 +33,7 @@ export const AdminOrderForm = ({
       allowDescription: false,
       chargeRecipient: false,
       customer: "sender",
-      items: [],
+      items: "",
       payOnDelivery: true,
       rider: "",
     },
@@ -147,12 +146,12 @@ export const AdminOrderForm = ({
 
       <FormGroup>
         <Label htmlFor="items">Item(s)</Label>
-        <Controller
-          control={control}
+        <Input
+          key="items"
+          id="items"
           name="items"
-          render={({ onChange, value }) => (
-            <TagsInput value={value} onChange={onChange} />
-          )}
+          placeholder="Separate with commas"
+          ref={register}
         />
 
         <FormError error={errors?.items?.message} />
