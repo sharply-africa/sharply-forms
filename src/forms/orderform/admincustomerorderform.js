@@ -47,9 +47,10 @@ export const AdminCustomerOrderForm = ({
     },
   });
 
-  const getPrice = useCallback((id) => pricelists.find((x) => x._id === id), [
-    pricelists,
-  ]);
+  const getPrice = useCallback(
+    (id) => pricelists.find((x) => x._id === id),
+    [pricelists]
+  );
 
   const showDescription = watch("allowDescription");
   const payOnDelivery = watch("payOnDelivery");
@@ -127,13 +128,13 @@ export const AdminCustomerOrderForm = ({
               key="control.sender.phoneNumber"
               control={control}
               name="sender.phoneNumber"
-              render={(props) => (
+              render={({ onChange, value, ...inputProps }) => (
                 <Input
-                  key="sender.phoneNumber"
                   id="sender.phoneNumber"
-                  onlyCountries={["ng"]}
                   type="phone"
-                  {...props}
+                  onChange={(...args) => onChange(args)}
+                  {...(value ? { value: value[0] } : {})}
+                  {...inputProps}
                 />
               )}
             />
@@ -241,12 +242,13 @@ export const AdminCustomerOrderForm = ({
             <Controller
               control={control}
               name="recipient.phoneNumber"
-              render={(props) => (
+              render={({ onChange, value, ...inputProps }) => (
                 <Input
                   id="recipient.phoneNumber"
-                  onlyCountries={["ng"]}
                   type="phone"
-                  {...props}
+                  onChange={(...args) => onChange(args)}
+                  {...(value ? { value: value[0] } : {})}
+                  {...inputProps}
                 />
               )}
             />

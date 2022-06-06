@@ -43,9 +43,10 @@ export const GuestOrderForm = ({
     },
   });
 
-  const getPrice = useCallback((id) => pricelists.find((x) => x._id === id), [
-    pricelists,
-  ]);
+  const getPrice = useCallback(
+    (id) => pricelists.find((x) => x._id === id),
+    [pricelists]
+  );
 
   const showDescription = watch("allowDescription");
   const priceID = watch("deliveryArea");
@@ -127,12 +128,13 @@ export const GuestOrderForm = ({
         <Controller
           control={control}
           name="sender.phoneNumber"
-          render={(props) => (
+          render={({ onChange, value, ...inputProps }) => (
             <Input
               id="sender.phoneNumber"
-              onlyCountries={["ng"]}
               type="phone"
-              {...props}
+              onChange={(...args) => onChange(args)}
+              {...(value ? { value: value[0] } : {})}
+              {...inputProps}
             />
           )}
         />
@@ -247,12 +249,13 @@ export const GuestOrderForm = ({
         <Controller
           control={control}
           name="recipient.phoneNumber"
-          render={(props) => (
+          render={({ onChange, value, ...inputProps }) => (
             <Input
               id="recipient.phoneNumber"
-              onlyCountries={["ng"]}
               type="phone"
-              {...props}
+              onChange={(...args) => onChange(args)}
+              {...(value ? { value: value[0] } : {})}
+              {...inputProps}
             />
           )}
         />
