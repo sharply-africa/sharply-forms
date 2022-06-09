@@ -13830,8 +13830,8 @@ sisteransi@^1.0.4, sisteransi@^1.0.5:
   integrity sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==
 
 "skylos-ui@https://github.com/skyeops/skylos-ui":
-  version "1.0.1"
-  resolved "https://github.com/skyeops/skylos-ui#09315a270332adb5963b13bf8bb3bc77e19183c3"
+  version "1.2.0"
+  resolved "https://github.com/skyeops/skylos-ui#ea6d1c7d464f09a97acf44a2f501a9d7dc56e870"
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
