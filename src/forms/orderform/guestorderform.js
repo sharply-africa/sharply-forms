@@ -43,10 +43,9 @@ export const GuestOrderForm = ({
     },
   });
 
-  const getPrice = useCallback(
-    (id) => pricelists.find((x) => x._id === id),
-    [pricelists]
-  );
+  const getPrice = useCallback((id) => pricelists.find((x) => x._id === id), [
+    pricelists,
+  ]);
 
   const showDescription = watch("allowDescription");
   const priceID = watch("deliveryArea");

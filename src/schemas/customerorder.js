@@ -43,7 +43,7 @@ export const customerOrderSchema = (isAdmin) =>
         .string()
         .test("testname", "Name is required", checkIfRecipientRequiredTest),
       phoneNumber: yup
-        .string()
+        .array()
         .phone()
         .test(
           "testname",
@@ -61,7 +61,7 @@ export const customerOrderSchema = (isAdmin) =>
         .string()
         .test("testname", "Name is required", checkIfSenderRequiredTest),
       phoneNumber: yup
-        .string()
+        .array()
         .phone()
         .test(
           "testname",

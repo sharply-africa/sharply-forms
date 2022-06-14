@@ -30,7 +30,7 @@ export const orderSchema = ({ isAdmin, requiredSender }) =>
         ? {
             name: yup.string().required("Name is required"),
             phoneNumber: yup
-              .string()
+              .array()
               .phone()
               .required("Phone number is required"),
             email: yup
