@@ -28,6 +28,7 @@ const cardStyles = {
 
 export const CustomerOrderForm = ({
   buttonText,
+  disablePayOnDelivery,
   isLoading,
   onSubmit,
   pricelists,
@@ -275,11 +276,15 @@ export const CustomerOrderForm = ({
           control={control}
           name="chargeRecipient"
           render={({ onChange, value }) => (
-            <Switch
-              active={value}
-              onChange={onChange}
-              title={"Payment on delivery"}
-            />
+            <>
+              {disablePayOnDelivery ? null : (
+                <Switch
+                  active={value}
+                  onChange={onChange}
+                  title={"Payment on delivery"}
+                />
+              )}
+            </>
           )}
         />
       </FormGroup>
@@ -299,9 +304,9 @@ export const CustomerOrderForm = ({
 
 CustomerOrderForm.defaultProps = {
   buttonText: "Submit Request",
+  disablePayOnDelivery: false,
   isLoading: false,
   onSubmit: () => {},
   pricelists: [],
-
   schema: null,
 };
