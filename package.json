@@ -51,7 +51,6 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-visualizer": "^4.2.0",
     "sharply-kit": "https://github.com/skyeops/sharply-kit",
-    "skylos-ui": "https://github.com/skyeops/skylos-ui",
     "yup": "^0.32.9"
   },
   "peerDependencies": {
@@ -64,11 +63,11 @@
     "react-hook-form": ">=6.15.5",
     "react-tagsinput": ">=3.19.0",
     "sharply-kit": "https://github.com/skyeops/sharply-kit",
-    "skylos-ui": "https://github.com/skyeops/skylos-ui",
     "yup": ">=0.32.9"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c --silent",
+    "prepare": "yarn build",
     "bundle-size": "cat dist/index.js | gzip | wc -c",
     "build-watch": "rollup -c -w",
     "start-playground": "cd playground && npm run start",
