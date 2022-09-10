@@ -11,7 +11,7 @@ import {
   Stack,
   Switch,
   Textarea,
-} from "skylos-ui";
+} from "sharply-kit";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DeliveryFee, PricePicker } from "components";
@@ -39,10 +39,9 @@ export const AdminOrderForm = ({
     },
   });
 
-  const getPrice = useCallback(
-    (id) => pricelists.find((x) => x._id === id),
-    [pricelists]
-  );
+  const getPrice = useCallback((id) => pricelists.find((x) => x._id === id), [
+    pricelists,
+  ]);
 
   const showDescription = watch("allowDescription");
   const payOnDelivery = watch("payOnDelivery");

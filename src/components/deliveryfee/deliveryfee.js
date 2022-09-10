@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Card, Stack, Text } from "skylos-ui";
+import { Box, Card, Stack, Text } from "sharply-kit";
 import { ReactComponent as MoneyIcon } from "icons/money.svg";
 import { formatAmount } from "lib/utils";
 

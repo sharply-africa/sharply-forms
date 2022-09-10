@@ -13760,6 +13760,16 @@ shallowequal@^1.1.0:
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
   integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
+"sharply-kit@https://github.com/skyeops/sharply-kit":
+  version "1.2.0"
+  resolved "https://github.com/skyeops/sharply-kit#f5f0a3001e458124d684ff7f62822a0cd4353f5b"
+  dependencies:
+    "@styled-system/css" "^5.1.5"
+    "@styled-system/should-forward-prop" "^5.1.5"
+    lodash.merge "^4.6.2"
+    styled-system "^5.1.5"
+    tinycolor2 "^1.4.2"
+
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"

@@ -12,7 +12,7 @@ import {
   Stack,
   Switch,
   Textarea,
-} from "skylos-ui";
+} from "sharply-kit";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DeliveryFee, PricePicker } from "components";

@@ -10,7 +10,7 @@ import {
   Label,
   Stack,
   Text,
-} from "skylos-ui";
+} from "sharply-kit";
 import { useClickAway, useModal } from "./hooks";
 
 export const PricePicker = ({
