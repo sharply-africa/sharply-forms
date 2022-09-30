@@ -33,7 +33,7 @@ export const DeliveryFee = ({ amount }) => {
       <Text fontSize="xs">Delivery Fee</Text>
 
       <Text color="heading" fontWeight="bold">
-        amount
+        {amount}
       </Text>
     </Card>
   );
