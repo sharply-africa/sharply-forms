@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Card, Stack, Text } from "sharply-kit";
 import { ReactComponent as MoneyIcon } from "icons/money.svg";
-import { formatAmount } from "lib/utils";
 
 export const DeliveryFee = ({ amount }) => {
   if (typeof amount === "undefined" || amount === null) return null;
@@ -34,7 +33,7 @@ export const DeliveryFee = ({ amount }) => {
       <Text fontSize="xs">Delivery Fee</Text>
 
       <Text color="heading" fontWeight="bold">
-        ₦{formatAmount(amount / 100)}
+        amount
       </Text>
     </Card>
   );

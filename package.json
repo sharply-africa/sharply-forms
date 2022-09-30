@@ -67,7 +67,7 @@
   },
   "scripts": {
     "build": "rollup -c --silent",
-    "prepublishOnly": "yarn build",
+    "prepare": "yarn build",
     "bundle-size": "cat dist/index.js | gzip | wc -c",
     "build-watch": "rollup -c -w",
     "start-playground": "cd playground && npm run start",
