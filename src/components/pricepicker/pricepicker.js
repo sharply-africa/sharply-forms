@@ -10,7 +10,7 @@ import {
   Label,
   Stack,
   Text,
-} from "skylos-ui";
+} from "sharply-kit";
 import { useClickAway, useModal } from "./hooks";
 
 export const PricePicker = ({
@@ -61,10 +61,11 @@ export const PricePicker = ({
             boxShadow: "0px 1px 2px #E7ECE8",
             left: 0,
             maxHeight: "30rem",
+            overflow: "auto",
+            p: 3,
             position: "absolute",
             top: "calc(100% +  0.4rem)",
             zIndex: 10,
-            overflow: "auto",
           }}
           width="100%"
         >

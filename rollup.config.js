@@ -15,7 +15,7 @@ const projectRootDir = path.resolve(__dirname);
 
 const srcDir = path.resolve(projectRootDir, "src");
 
-export default {
+const config = {
   input: pkg.source,
   output: [
     { file: pkg.main, format: "cjs" },
@@ -34,9 +34,7 @@ export default {
       ],
     }),
     svgr(),
-    babel({
-      exclude: "node_modules/**",
-    }),
+    babel({ exclude: "node_modules/**" }),
     nodeResolve(),
     image(),
     del({ targets: ["dist/*"] }),
@@ -45,3 +43,5 @@ export default {
     visualizer(),
   ],
 };
+
+export default config;

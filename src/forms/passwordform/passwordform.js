@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, FormError, FormGroup, Input, Label, Stack } from "skylos-ui";
+import { Button, FormError, FormGroup, Input, Label, Stack } from "sharply-kit";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { passwordSchema } from "schemas";

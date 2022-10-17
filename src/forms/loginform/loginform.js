@@ -7,7 +7,7 @@ import {
   Input,
   Label,
   Stack,
-} from "skylos-ui";
+} from "sharply-kit";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "schemas";
