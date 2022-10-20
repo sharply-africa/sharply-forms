@@ -6,7 +6,7 @@ import "react-day-picker/lib/style.css";
 
 const withTheme = (Story, context) => {
   return (
-    <ThemeProvider>
+    <ThemeProvider googleMapsKey="ubxniioesdz">
       <div
         id="story-wrapper"
         style={{
